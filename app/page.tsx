@@ -1,4 +1,5 @@
 "use client";
+import { Box, Image } from "@mantine/core";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -27,19 +28,19 @@ export default function Home() {
     return () => window.removeEventListener("resize", updatePath);
   }, []);
 
-  // Ghosts: color and animation delay (in seconds)
   const ghosts = [
-    { color: "red", delay: 0.5 },      // Blinky
-    { color: "pink", delay: 1 },     // Pinky
-    { color: "cyan", delay: 1.5 },    // Inky
-    { color: "orange", delay: 2 },  // Clyde
+    { color: "red", delay: 0.6  },      // Blinky
+    { color: "pink", delay: 0.9 },     // Pinky
+    { color: "cyan", delay: 1.2 },    // Inky
+    { color: "orange", delay: 1.5 },  // Clyde
   ];
 
   return (
-    <div className="w-full h-screen relative overflow-hidden">
+    <Box className="w-full h-screen relative z-99999">
       {path && (
-        <>
-          <div
+        <Box className="absolute inset-0 pointer-events-none">
+        
+          <Box
             className="absolute pacman"
             style={{
               offsetPath: `path('${path}')`,
@@ -47,176 +48,67 @@ export default function Home() {
               animation: "moveAlongRoad 20s linear infinite",
               transform: "scale(1.3)", 
               transformOrigin: "top center", 
-            }}
-
-          >
-            <div className="offset-pacman"></div>
-          </div>
+            }}>
+            <Box className="offset-pacman"></Box>
+          </Box>
 
           {ghosts.map((ghost, idx) => (
-            <div
+            <Box
               key={idx}
-              className="absolute top-5 ghost"
+              className="absolute top-2 ghost"
               style={{
                 offsetPath: `path('${path}')`,
                 offsetRotate: "0deg",
                 animation: `moveAlongRoad 20s linear infinite, colourSwap 0.5s linear infinite`,
                 animationDelay: `${ghost.delay}s`,
+                transform: "scale(0.9)", 
+              transformOrigin: "top center", 
               }}
             >
-              <div className="ghost-body" 
+              <Box className="ghost-body" 
               style={{
                 background: ghost.color,
                 transform: "scale(0.85)",
                 transformOrigin: "top center", 
               }}>
-                <div className="ghost-eyes">
-                  <div className="ghost-eye left"></div>
-                  <div className="ghost-eye right"></div>
-                </div>
-                <div className="ghost-pupils">
-                  <div className="ghost-pupil left"></div>
-                  <div className="ghost-pupil right"></div>
-                </div>
-                <div className="ghost-skirt">
-                  <div className="skirt-point"></div>
-                  <div className="skirt-point"></div>
-                  <div className="skirt-point"></div>
-                </div>
-              </div>
-            </div>
+                <Box className="ghost-eyes">
+                  <Box className="ghost-eye left"></Box>
+                  <Box className="ghost-eye right"></Box>
+                </Box>
+                <Box className="ghost-pupils">
+                  <Box className="ghost-pupil left"></Box>
+                  <Box className="ghost-pupil right"></Box>
+                </Box>
+                <Box className="ghost-skirt">
+                  <Box className="skirt-point"></Box>
+                  <Box className="skirt-point"></Box>
+                  <Box className="skirt-point"></Box>
+                </Box>
+              </Box>
+            </Box>
           ))}
-        </>
+        </Box>
       )}
 
-      <style jsx>{`
-        @keyframes moveAlongRoad {
-          from {
-            offset-distance: 0%;
-          }
-          to {
-            offset-distance: 100%;
-          }
-        }
 
-        .offset-pacman {
-          position: absolute;
-          width: 0;
-          height: 0;
-          border: solid 16px;
-          border-right-color: transparent;
-          border-bottom-color: transparent;
-          border-radius: 50%;
-          transform: translate(-16px, -16px);
-        }
+      <Box className="w-full h-[20%] flex justify-between items-center">
+          <Box className="w-[65%] h-full flex items-center justify-center">
+            <h1 className="banner">Kirti Saumya Joshi</h1>
+          </Box>
+        <Box className="w-[35%] h-full flex items-center justify-center text-4xl font-bold">2</Box>
+      </Box>
+      <Box className="w-full h-[50%] flex justify-between items-center">
+        <Box className="w-[50%] h-full flex items-center justify-center text-4xl font-bold">3</Box>
+        <Box className="w-[50%] h-full flex items-center justify-center">
+            <Image src={"/"}>
 
-        .offset-pacman::before,
-        .offset-pacman::after {
-          content: "";
-          position: absolute;
-          width: 0;
-          height: 0;
-          border: solid 16px yellow;
-          border-radius: 50%;
-          left: -16px;
-          top: -16px;
-          border-right-color: transparent;
-        }
-
-        .offset-pacman::before {
-          border-bottom-color: transparent;
-          animation: pacTop 0.45s infinite linear;
-        }
-
-        .offset-pacman::after {
-          border-top-color: transparent;
-          animation: pacBottom 0.45s infinite linear;
-        }
-
-        @keyframes pacTop {
-          50% {
-            transform: rotate(44deg);
-          }
-        }
-
-        @keyframes pacBottom {
-          50% {
-            transform: rotate(-44deg);
-          }
-        }
-
-        /* Ghost Styles */
-        .ghost-body {
-          position: relative;
-          width: 50px;
-          height: 60px;
-          border-top-left-radius: 60px;
-          border-top-right-radius: 60px;
-          margin-top: -30px;
-          clip-path: polygon(
-            0 0, 100% 0, 100% 80%,
-            0 80%, 0 100%, 25% 80%,
-            50% 100%, 25% 0%, 50% 100%,
-            70% 80%, 60% 100%, 70% 80%,
-            100% 100%, 100% 80%,
-            0 80%
-          );
-        }
-
-        .ghost-eyes {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-        }
-
-        .ghost-eye {
-          position: absolute;
-          background: white;
-          height: 20px;
-          width: 16px;
-          border-radius: 100%;
-          top: 12px;
-        }
-
-        .ghost-eye.left { left: 6px; }
-        .ghost-eye.right { left: 28px; }
-
-        .ghost-pupils .ghost-pupil {
-          position: absolute;
-          background: blue;
-          height: 8px;
-          width: 8px;
-          border-radius: 100%;
-          top: 20px;
-        }
-
-        .ghost-pupil.left { left: 10px; animation: peeperLeft 0.7s linear infinite; }
-        .ghost-pupil.right { left: 32px; animation: peeperRight 0.7s linear infinite; }
-
-        @keyframes peeperLeft { 0%,100% { left: 10px; } 50% { left: 14px; } }
-        @keyframes peeperRight { 0%,100% { left: 32px; } 50% { left: 36px; } }
-      `}</style>
-
-      {/* Roads */}
-      <div className="w-full border-4 border-dashed border-gray-400"/>
-      <div className="w-full h-[20%] flex justify-between items-center">
-        <div className="w-[65%] h-full bg-green-100 flex items-center justify-center text-4xl font-bold">1</div>
-        <div className="h-full border-4 border-dashed border-gray-400"/>
-        <div className="w-[35%] h-full bg-blue-100 flex items-center justify-center text-4xl font-bold">2</div>
-      </div>
-      <div className="w-full border-4 border-dashed border-gray-400"/>
-      <div className="w-full h-[50%] flex justify-between items-center">
-        <div className="w-[50%] h-full bg-purple-100 flex items-center justify-center text-4xl font-bold">3</div>
-        <div className="h-full border-4 border-dashed border-gray-400"/>
-        <div className="w-[50%] h-full bg-pink-100 flex items-center justify-center text-4xl font-bold">4</div>
-      </div>
-      <div className="w-full border-4 border-dashed border-gray-400"/>
-      <div className="w-full h-[30%] flex justify-between items-center">
-        <div className="w-[35%] h-full bg-orange-100 flex items-center justify-center text-4xl font-bold">5</div>
-        <div className="h-full border-4 border-dashed border-gray-400"/>
-        <div className="w-[65%] h-full bg-yellow-100 flex items-center justify-center text-4xl font-bold">6</div>
-      </div>
-      <div className="w-full border-4 border-dashed border-gray-400"/>
-    </div>
+            </Image>
+        </Box>
+      </Box>
+      <Box className="w-full h-[30%] flex justify-between items-center">
+        <Box className="w-[35%] h-full flex items-center justify-center text-4xl font-bold">5</Box>
+        <Box className="w-[65%] h-full flex items-center justify-center text-4xl font-bold">6</Box>
+      </Box>
+    </Box>
   );
 }
