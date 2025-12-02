@@ -1,5 +1,5 @@
 "use client";
-import { Box, Image } from "@mantine/core";
+import { Box } from "@mantine/core";
 import Landing from "./components/home/Landing";
 
 export default function Home() {

@@ -7,6 +7,7 @@ import Link from "next/link";
 const NAV_LINKS = [
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
+  { label: "Projects", href: "/projects" },
 ];
 
 export default function Navbar() {
@@ -19,7 +20,7 @@ export default function Navbar() {
           <Text unstyled className="text-2xl font-medium">KSJ</Text>
         </Link>
 
-        <Box className="hidden md:flex gap-6 text-2xl font-medium">
+        <Box className="hidden md:flex gap-6 text-xl font-medium">
           {NAV_LINKS.map((link) => (
             <Link key={link.href} href={link.href}>
               {link.label}
