@@ -1,37 +1,9 @@
 @import "tailwindcss";
 
 body {
-    font-family: var(--font-bebas-neue), sans-serif;  
+    font-family: "Merriweather", serif;
     margin: 0;
     padding: 0;    
-}
-
-h1, h2, h3 {
-    margin-top: 0;
-    letter-spacing: 0.05em;     
-    line-height: 1.1; 
-}
-.banner{
-  font-size: 120px;
-  letter-spacing: 0.1em;     
-  line-height: 1.1; 
-}
-h1 {
-    font-size: 72px;
-}
-
-h2 {
-    font-size: 2rem;
-}
-
-p {
-    font-size: 24px;
-}
-
-.title {
-    color: #252525;
-    font-size: 20px;
-    letter-spacing: 0.1em;
 }
 
 @keyframes chomp {
@@ -149,3 +121,22 @@ p {
   @keyframes peeperLeft { 0%,100% { left: 10px; } 50% { left: 14px; } }
   @keyframes peeperRight { 0%,100% { left: 32px; } 50% { left: 36px; } }
       
+  @media (max-width: 768px) {
+  .offset-pacman {
+    transform: translate(-16px, -16px) scale(0.75);
+  }
+
+  .ghost-body {
+    transform: scale(0.75);
+  }
+}
+
+@media (max-width: 400px) {
+  .offset-pacman {
+    transform: translate(-16px, -16px) scale(0.55);
+  }
+
+  .ghost-body {
+    transform: scale(0.55);
+  }
+}

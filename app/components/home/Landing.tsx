@@ -1,126 +1,205 @@
 "use client";
-import { Box } from "@mantine/core";
+import { Box, Title } from "@mantine/core";
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import CssLogo from '../../assets/css-3.svg';
+import HtmlLogo from '../../assets/html-1.svg';
+import NextLogo from '../../assets/next-js.svg';
+import JavaLogo from '../../assets/javascript-1.svg';
+import NodeLogo from '../../assets/nodejs.svg';
+import ReactLogo from '../../assets/reactjs.svg';
 
 export default function Landing() {
-  const [path, setPath] = useState("");
+  const [eatenLogos, setEatenLogos] = useState<number[]>([]);
+  const [pacmanPosition, setPacmanPosition] = useState(0);
+  const [ghostsConfig, setGhostsConfig] = useState([
+    { color: "red", offset: 7 },
+    { color: "pink", offset: 11 },
+    { color: "cyan", offset: 15 },
+    { color: "orange", offset: 19 },
+  ]);
+  const logos = [
+    { src: HtmlLogo, alt: "HTML Logo" },
+    { src: CssLogo, alt: "CSS Logo" },
+    { src: JavaLogo, alt: "JavaScript Logo" },
+    { src: NextLogo, alt: "Next.js Logo" },
+    { src: NodeLogo, alt: "Node.js Logo" },
+    { src: ReactLogo, alt: "React Logo" },
+  ];
+  const [logoScale, setLogoScale] = useState(1);
 
-  useEffect(() => {
-    const updatePath = () => {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
+useEffect(() => {
+  const updateResponsiveValues = () => {
+    const width = window.innerWidth;
 
-      const road1Y = 0;
-      const road3Y = height * 0.2;
-      const road5Y = height * 0.7;
-      const road7Y = height;
+    if (width <= 400) {
+      setGhostsConfig([
+        { color: "red", offset: 18 },
+        { color: "pink", offset: 26 },
+        { color: "cyan", offset: 34 },
+        { color: "orange", offset: 42 },
+      ]);
+      setLogoScale(0.7);
+    } 
+    else if (width <= 768) {
+      setGhostsConfig([
+        { color: "red", offset: 14 },
+        { color: "pink", offset: 20 },
+        { color: "cyan", offset: 26 },
+        { color: "orange", offset: 32 },
+      ]);
+      setLogoScale(0.8);
+    } 
+    else {
+      setGhostsConfig([
+        { color: "red", offset: 7 },
+        { color: "pink", offset: 11 },
+        { color: "cyan", offset: 15 },
+        { color: "orange", offset: 19 },
+      ]);
+      setLogoScale(1);
+    }
+  };
 
-      const road2X = width * 0.65;
-      const road4X = width * 0.5;
-      const road6X = width * 0.35;
+  updateResponsiveValues();
+  window.addEventListener("resize", updateResponsiveValues);
+  return () => window.removeEventListener("resize", updateResponsiveValues);
+}, []);
 
-      const newPath = `M 0 ${road1Y} L ${road2X} ${road1Y} L ${road2X} ${road3Y} L ${road4X} ${road3Y} L ${road4X} ${road5Y} L ${road6X} ${road5Y} L ${road6X} ${road7Y} L ${width * 0.95} ${road7Y}`;
-      setPath(newPath);
+useEffect(() => {
+    
+    const totalDuration = 12000;
+    const startTime = Date.now();
+    const numberOfLogos = logos.length;
+
+    const logoPositions = logos.map((_, index) => {
+      return ((index + 0.5) / numberOfLogos) * 100;
+    });
+
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = (elapsed % totalDuration) / totalDuration;
+      const currentPosition = progress * 100; 
+      
+      setPacmanPosition(currentPosition);
+
+      const newEatenLogos: number[] = [];
+      
+      const vacuumOffset = 1.8; 
+
+      logoPositions.forEach((logoPos, index) => {
+
+        if (currentPosition >= logoPos - vacuumOffset) {
+          newEatenLogos.push(index);
+        }
+      });
+      setEatenLogos(newEatenLogos);
+
+      if (progress >= 0.99) {
+         setEatenLogos([]);
+      }
+
+      const animationFrame = requestAnimationFrame(animate);
+      return () => cancelAnimationFrame(animationFrame);
     };
 
-    updatePath();
-    window.addEventListener("resize", updatePath);
-    return () => window.removeEventListener("resize", updatePath);
-  }, []);
+    const animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
 
-  const ghosts = [
-    { color: "red", delay: 0.6  }, 
-    { color: "pink", delay: 0.9 },
-    { color: "cyan", delay: 1.2 },
-    { color: "orange", delay: 1.5 },
-  ];
+  }, [logos.length]);
+
+const getGhostPosition = (offset: number): number => {
+    let position = pacmanPosition - offset;
+    if (position < 0) {
+      position += 100; 
+    }
+    return position;
+  };
 
   return (
     <Box className="w-full flex flex-col relative">
-      <Box className="h-screen w-full relative">
-        {path && (
-        <Box className="absolute inset-0 pointer-events-none">       
-          <Box
-            className="absolute pacman"
-            style={{
-              offsetPath: `path('${path}')`,
-              offsetRotate: "auto",
-              animation: "moveAlongRoad 20s linear infinite",
-              transform: "scale(1.3)", 
-              transformOrigin: "top center", 
-            }}>
-            <Box className="offset-pacman"></Box>
+      <Box className="lg:h-[80vh] h-[60vh]  w-full relative flex items-center justify-center overflow-hidden">
+        <Box className="w-full">
+      
+          <Box className="w-full flex justify-center items-center">
+            <Title unstyled order={1} className="lg:text-[148px] text-5xl font-black text-center">
+              Kirti Saumya Joshi.
+            </Title>
           </Box>
 
-          {ghosts.map((ghost, idx) => (
+          <Box className="relative w-full h-32">
+            <Box className="absolute inset-0 flex justify-around items-center ">
+              {logos.map((logo, index) => {
+                const isEaten = eatenLogos.includes(index);
+                return (
+                  <Box
+                    key={index}
+                    className="transition-all duration-300" 
+                    style={{
+                            width: `${50 * logoScale}px`,
+                            height: `${50 * logoScale}px`,
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            opacity: isEaten ? 0 : 1,
+                            transform: isEaten ? `scale(0)` : `scale(${logoScale})`,
+                          }}
+                  >
+                    <Image
+                      className="w-full h-full"
+                      src={logo.src}
+                      alt={logo.alt}
+                      style={{ transition: 'none' }} 
+                    />
+                  </Box>
+                );
+              })}
+            </Box>
+
             <Box
-              key={idx}
-              className="absolute top-2 ghost"
+              className="absolute top-1/2"
               style={{
-                offsetPath: `path('${path}')`,
-                offsetRotate: "0deg",
-                animation: `moveAlongRoad 20s linear infinite, colourSwap 0.5s linear infinite`,
-                animationDelay: `${ghost.delay}s`,
-                transform: "scale(0.9)", 
-              transformOrigin: "top center", 
+                left: `${pacmanPosition}%`, 
+                transform: `translateY(-50%) translateX(-50%) scale(2)`,
+                transition: "none", 
               }}
             >
-              <Box className="ghost-body" 
-              style={{
-                background: ghost.color,
-                transform: "scale(0.85)",
-                transformOrigin: "top center", 
-              }}>
-                <Box className="ghost-eyes">
-                  <Box className="ghost-eye left"></Box>
-                  <Box className="ghost-eye right"></Box>
-                </Box>
-                <Box className="ghost-pupils">
-                  <Box className="ghost-pupil left"></Box>
-                  <Box className="ghost-pupil right"></Box>
-                </Box>
-                <Box className="ghost-skirt">
-                  <Box className="skirt-point"></Box>
-                  <Box className="skirt-point"></Box>
-                  <Box className="skirt-point"></Box>
-                </Box>
-              </Box>
-            </Box>
-          ))}
-        </Box>
-      )}
-        <Box className="w-full h-[20%] flex justify-between items-center ">
-            <Box className="w-[65%] h-full flex items-center justify-center">
-              <h1 className="banner">Kirti Saumya Joshi</h1>
-            </Box>
-          <Box className="w-[35%] h-full flex items-center justify-center text-4xl font-bold lowercase p-6">
-            
-          </Box>
-        </Box>
-        <Box className="w-full h-[50%] flex justify-between items-center">
-          <Box className="w-[50%] h-full flex">
-            <Box className="bg-amber-400 h-full w-[75%] z-40 rounded-r-[164px] flex justify-start items-center">
-                <Box className="border-b-8 border-r-8 border-t-8 border-amber-50 w-[90%] h-[80%] rounded-r-[164px]">
-                  
-                </Box>
-            </Box>
-            <Box className="z-50 absolute w-[75%] h-[50%]">
-              <Box className="flex justify-center items-center w-full h-full">
-                <h1 className="text-center">
-                Building intuitive<br/> and engaging <br/> web experiences
-                </h1>
+              <Box className="pacman">
+                <Box className="offset-pacman"></Box>
               </Box>
               
             </Box>
-            
+            {ghostsConfig.map((ghost, idx) => {
+                const ghostPosition = getGhostPosition(ghost.offset);
+                return (
+                    <Box
+                      key={idx}
+                      className="absolute top-1/2"
+                      style={{
+                        left: `${ghostPosition}%`,
+                      }}
+                    >
+                      <Box 
+                        className="ghost-body" 
+                        style={{ background: ghost.color }}>
+                        <Box className="ghost-eyes">
+                          <Box className="ghost-eye left"></Box>
+                          <Box className="ghost-eye right"></Box>
+                        </Box>
+                        <Box className="ghost-pupils">
+                          <Box className="ghost-pupil left"></Box>
+                          <Box className="ghost-pupil right"></Box>
+                        </Box>
+                        <Box className="ghost-skirt">
+                          <Box className="skirt-point"></Box>
+                          <Box className="skirt-point"></Box>
+                          <Box className="skirt-point"></Box>
+                        </Box>
+                      </Box>
+                    </Box>
+                );
+            })}
           </Box>
-          <Box className="w-[50%] h-full flex items-center justify-center">
-              
-          </Box>
-        </Box>
-        <Box className="w-full h-[30%] flex justify-between items-center">
-          <Box className="w-[35%] h-full flex items-center justify-center text-4xl font-bold">5</Box>
-          <Box className="w-[65%] h-full flex items-center justify-center text-4xl font-bold">6</Box>
         </Box>
       </Box>
     </Box>
