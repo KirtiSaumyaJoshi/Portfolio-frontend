@@ -1,186 +1,190 @@
 "use client";
-import { useState, useMemo, useCallback } from 'react';
-import { Box, Title } from '@mantine/core';
+import { IconChevronLeft, IconChevronRight, IconExternalLink } from '@tabler/icons-react';
+import React, { useState, useCallback, useRef } from 'react';
 
 const projectData = [
   {
     title: 'RemoteAxle',
-    description: 'A cutting-edge platform utilizing React and Node.js for real-time data visualization.',
-    link: '#',
+    description: 'An e-learning platform designed to facilitate self-paced online education. The website features a user-friendly interface for browsing courses, tracking student progress through personalized dashboards, and issuing digital certificates upon completion. It supports various learning formats including video lessons, quizzes, and workshops.',
+    link: 'https://remoteaxle.com/',
   },
   {
     title: 'Everest Educators',
-    description: 'An e-commerce solution built with Next.js and Stripe integration for seamless checkout.',
-    link: '#',
+    description: 'A professional educational website for a tutoring and enrichment center focused on children. The platform showcases services such as coding classes and subject-specific tutoring. It includes features for parent engagement, such as success stories, reviews, and a direct appointment booking system to streamline enrollment.',
+    link: 'https://everesteduacademy.ca/',
   },
   {
     title: 'Remotely Learn',
-    description: 'A mobile-first application focused on social networking and community building.',
-    link: '#',
+    description: 'An educational platform and coding bootcamp designed to guide students in becoming software engineers. The website emphasizes a practical curriculum with project-based learning and live online classes. It includes features for prospective students to browse and apply for bootcamps, as well as a recruitment portal for companies to hire graduates.',
+    link: 'https://remotelylearn.com/',
   },
   {
-    title: 'Project Delta',
-    description: 'An AI-powered recommendation engine developed with Python and a custom ML model.',
-    link: '#',
+    title: 'JobAxle',
+    description: 'A specialized job portal tailored for the IT, engineering, and management sectors. The platform connects job seekers with employers through advanced search functionality, allowing users to filter by job title, type, and level. It features a robust listing system for "Premium Jobs" and provides tools for employers to post and manage job openings.',
+    link: 'https://jobaxle.com/',
   },
   {
-    title: 'Project Epsilon',
-    description: 'A portfolio site generator that offers customizable themes and rapid deployment.',
-    link: '#',
-  },
-  {
-    title: 'Project Zeta',
-    description: 'A cloud-based infrastructure manager using AWS CDK and TypeScript.',
-    link: '#',
-  },
-  {
-    title: 'Project Eta',
-    description: 'A lightweight task management tool with offline capabilities.',
-    link: '#',
+    title: 'eBooking Nepal',
+    description: 'A comprehensive travel and accommodation booking engine focused on the Nepalese tourism market. The platform allows users to search, compare, and reserve various accommodations (hotels, resorts, homestays) and vehicle rentals. It features a dynamic search interface with filters for dates, guests, and property types to simplify travel planning.',
+    link: 'https://ebookingnepal.com/',
   },
 ];
-
-const ChevronLeft = (props:any) => (
-  <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="m15 18-6-6 6-6"/>
-  </svg>
-);
-
-const ChevronRight = (props:any) => (
-  <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="m9 18 6-6-6-6"/>
-  </svg>
-);
-
-const ExternalLink = (props:any) => (
-    <svg {...props} xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-        <path d="M15 3h6v6"/>
-        <path d="M10 14 21 3"/>
-    </svg>
-);
 
 export default function Projects() {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const getProjectIndex = (offset:any) => {
-    const totalProjects = projectData.length;
-    return (
-      ((activeIndex + offset) % totalProjects) +
-      (activeIndex + offset < 0 ? totalProjects : 0)
-    );
-  };
-
-  const offsets = [-3, -2, -1, 0, 1, 2, 3];
-
-const carouselItems = useMemo(() => {
-    return offsets.map((offset) => {
-      const projectIndex = getProjectIndex(offset);
-      const project = projectData[projectIndex];
-      let classes = '';
-      const baseClasses =
-        'absolute transition-all duration-500 ease-in-out bg-white border-2 rounded-xl p-6 flex flex-col justify-between overflow-hidden cursor-pointer hover:border-gray-400';
-
-      switch (offset) {
-        case 0:
-          classes =
-            'w-[350px] h-[450px] opacity-100 scale-[1.05] z-30 shadow-2xl border-blue-500';
-          break;
-        case -1:
-        case 1:
-          classes =
-            'w-[350px] h-[550px] opacity-100 scale-[1.0] z-20 border-gray-200';
-          break;
-        case -2:
-        case 2:
-          classes =
-            'w-[350px] h-[650px] opacity-50 z-10 border-gray-200';
-          break;
-        case -3:
-        case 3:
-          classes =
-            'w-[350px] h-[650px] opacity-0 blur-lg z-0 pointer-events-none border-gray-200';
-          break;
-        default:
-          classes = 'hidden border-gray-200';
-      }
-
-      const transformX = `${offset * 380}px`;
-
-      return {
-        ...project,
-        key: `project-${projectIndex}`,
-        style: { transform: `translateX(${transformX})` },
-        // The base class is now composed of shared styles, and the specific border is in 'classes'
-        className: `${baseClasses.replace('border-2 border-gray-200', 'border-2')} ${classes}`,
-      };
-    });
-  }, [activeIndex]);
+  const touchStartX = useRef(0);
+  const swipeThreshold = 50;
 
   const goToNext = useCallback(() => {
-    setActiveIndex((prevIndex) => (prevIndex + 1) % projectData.length);
+    setActiveIndex((prev) => (prev + 1) % projectData.length);
   }, []);
 
   const goToPrev = useCallback(() => {
-    setActiveIndex((prevIndex) => {
-      const newIndex = prevIndex - 1;
-      return newIndex < 0 ? projectData.length - 1 : newIndex;
-    });
+    setActiveIndex((prev) => (prev - 1 + projectData.length) % projectData.length);
   }, []);
 
-  return (
-    <Box className="flex flex-col gap-6 py-6">
-      <Box className="flex justify-center">
-        <Title unstyled className="text-6xl md:text-[72px] font-extrabold text-gray-800">
-          Projects
-        </Title>
-      </Box>
+  const handleTouchStart = (e: React.TouchEvent | React.MouseEvent) => {
+    touchStartX.current = 'touches' in e ? e.touches[0].clientX : e.clientX;
+  };
 
-      <Box className="relative w-full h-[650px] flex justify-center items-center overflow-hidden">
-        <Box className="relative w-full max-w-7xl h-full flex justify-center items-center">
-          {carouselItems.map((item) => (
-            <Box
-              key={item.key}
-              style={item.style}
-              className={item.className}
-              onClick={() => {
-                if (item.key === carouselItems[2].key) { 
-                    goToPrev();
-                } else if (item.key === carouselItems[4].key) { 
-                    goToNext();
-                }
-              }}
-            >
-              <h3 className="text-3xl font-bold text-gray-900">{item.title}</h3>
-              <p className="text-gray-600 pt-2">{item.description}</p>
-              <a
-                href={item.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-2 mt-4"
-                onClick={(e) => e.stopPropagation()}
+  const handleTouchEnd = (e: React.TouchEvent | React.MouseEvent) => {
+    const touchEndX = 'changedTouches' in e ? e.changedTouches[0].clientX : e.clientX;
+    const distance = touchStartX.current - touchEndX;
+
+    if (distance > swipeThreshold) {
+      goToNext();
+    } else if (distance < -swipeThreshold) {
+      goToPrev();
+    }
+    touchStartX.current = 0;
+  };
+
+  const getOffset = (index: number) => {
+    const total = projectData.length;
+    let offset = (index - activeIndex) % total;
+    if (offset < 0) offset += total;
+    if (offset > total / 2) {
+      offset -= total;
+    }
+    return offset;
+  };
+
+  return (
+    <div className="flex flex-col gap-6 py-6 w-full overflow-hidden h-screen">
+      <div className="flex justify-center">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-gray-800 tracking-tight">
+          My Projects
+        </h1>
+      </div>
+
+      <div
+        className="relative w-full h-[400px] md:h-[600px] flex justify-center items-center"
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onMouseDown={handleTouchStart}
+        onMouseUp={handleTouchEnd}
+      >
+        <div className="relative w-full h-full flex justify-center items-center">
+          {projectData.map((project, index) => {
+            const offset = getOffset(index);
+            const absOffset = Math.abs(offset);
+
+            const isVisible = absOffset <= 2;
+
+            const isActive = offset === 0;
+            const heightClass = isActive ? 'h-[380px] md:h-[450px]' : 'h-[350px] md:h-[400px]';
+
+            const translateX = `translateX(${offset * (absOffset === 1 ? 80 : 160)}%)`;
+            
+
+            const scale = isActive ? 'scale-100' : (absOffset === 1 ? 'scale-90' : 'scale-75');
+            
+
+            const opacity = isActive ? 1 : (absOffset === 1 ? 0.7 : 0);
+            
+
+            const zIndex = 50 - absOffset * 10;
+            
+            const blur = isActive ? 'blur-0' : (absOffset === 1 ? 'blur-[1px]' : 'blur-md');
+
+            const handleClick = (e: React.MouseEvent) => {
+              if (isActive) return;
+              e.stopPropagation();
+              if (offset > 0) goToNext();
+              else goToPrev();
+            };
+
+            return (
+              <div
+                key={`project-${index}`}
+                onClick={handleClick}
+                className={`
+                  absolute top-1/2 left-1/2
+                  w-[280px] md:w-[350px]
+                  ${heightClass}
+                  bg-white rounded-2xl p-6 flex flex-col justify-between 
+                  shadow-2xl border
+                  transition-all duration-500 ease-out
+                  ${scale} ${blur}
+                  ${!isVisible ? 'pointer-events-none' : 'cursor-pointer'}
+                  ${isActive ? 'border-blue-500 border-2' : 'border-gray-200 border-2'}
+                `}
+                style={{
+                    transform: `translate(-50%, -50%) ${translateX}`,
+                    opacity: opacity,
+                    zIndex: zIndex,
+                    visibility: opacity === 0 ? 'hidden' : 'visible',
+                }}
               >
-                View Project <ExternalLink size={16} className="w-4 h-4" />
-              </a>
-            </Box>
-          ))}
-        </Box>
+                <div>
+                    <h3 className={`text-2xl font-bold transition-colors duration-300 ${isActive ? 'text-gray-900' : 'text-gray-600'} line-clamp-2`}>
+                      {project.title}
+                    </h3>
+                    <p className="text-gray-600 pt-4 leading-relaxed text-sm md:text-base">
+                      {project.description}
+                    </p>
+                </div>
+                
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`
+                    font-semibold flex items-center gap-2 mt-4 transition-all duration-300
+                    ${isActive ? 'text-blue-600 hover:text-blue-800 translate-y-0' : 'text-transparent translate-y-4'}
+                  `}
+                  onClick={(e) => {
+                      if (!isActive) e.preventDefault();
+                      e.stopPropagation();
+                  }}
+                  tabIndex={isActive ? 0 : -1}
+                >
+                      <>
+                        View Project <IconExternalLink size={18} />
+                      </>
+                </a>
+              </div>
+            );
+          })}
+          
+        </div>
 
         <button
-          onClick={goToPrev}
-          className="absolute left-4 md:left-10 z-50 p-3 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
+          onClick={(e) => { e.stopPropagation(); goToPrev(); }}
+          className="absolute hidden md:flex items-center justify-center left-4 md:left-12 z-60 p-4 bg-white/90 backdrop-blur-md rounded-full shadow-xl hover:scale-110 transition-all border border-gray-100 group text-gray-700 hover:text-blue-600"
           aria-label="Previous Project"
         >
-          <ChevronLeft className="w-8 h-8 text-gray-700" />
+          <IconChevronLeft className="w-6 h-6" />
         </button>
         <button
-          onClick={goToNext}
-          className="absolute right-4 md:right-10 z-50 p-3 bg-white rounded-full shadow-lg hover:bg-gray-100 transition-colors"
+          onClick={(e) => { e.stopPropagation(); goToNext(); }}
+          className="absolute hidden md:flex items-center justify-center right-4 md:right-12 z-60 p-4 bg-white/90 backdrop-blur-md rounded-full shadow-xl hover:scale-110 transition-all border border-gray-100 group text-gray-700 hover:text-blue-600"
           aria-label="Next Project"
         >
-          <ChevronRight className="w-8 h-8 text-gray-700" />
+          <IconChevronRight className="w-6 h-6" />
         </button>
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 }

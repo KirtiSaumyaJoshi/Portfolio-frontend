@@ -15,7 +15,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="w-full py-4 px-6 md:px-24 lg:px-52 shadow-md bg-white flex justify-between items-center">
+      <nav className="w-full md:py-4 px-6 md:px-24 lg:px-52 shadow-md bg-white flex justify-between items-center">
         <Link href="/">
           <Text unstyled className="text-2xl font-medium">KSJ</Text>
         </Link>
