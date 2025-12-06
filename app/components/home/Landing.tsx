@@ -118,7 +118,7 @@ const getGhostPosition = (offset: number): number => {
 
   return (
     <Box className="w-full flex flex-col relative">
-      <Box className="lg:h-[80vh] h-[60vh]  w-full relative flex items-center justify-center overflow-hidden">
+      <Box className="lg:h-screen h-[60vh]  w-full relative flex items-center justify-center overflow-hidden">
         <Box className="w-full">
       
           <Box className="w-full flex justify-center items-center">
