@@ -71,9 +71,9 @@ export default function Projects() {
   };
 
   return (
-    <div className="flex flex-col gap-6 py-6 w-full overflow-hidden h-screen">
+    <div className="flex flex-col gap-6 py-6 w-full overflow-hidden h-screen px-8 lg:px-16">
       <div className="flex justify-center">
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-gray-800 tracking-tight">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 tracking-tight">
           My Projects
         </h1>
       </div>
@@ -90,23 +90,39 @@ export default function Projects() {
             const offset = getOffset(index);
             const absOffset = Math.abs(offset);
 
-            const isVisible = absOffset <= 2;
+            const isVisible = absOffset <= 4;
 
             const isActive = offset === 0;
-            const heightClass = isActive ? 'h-[380px] md:h-[450px]' : 'h-[350px] md:h-[400px]';
+            const heightClass = isActive ? 'h-[400px] md:h-[450px]' : 'h-[380px] md:h-[400px]';
 
-            const translateX = `translateX(${offset * (absOffset === 1 ? 80 : 160)}%)`;
-            
+            const translateX = `translateX(${offset * 70}%)`;
 
-            const scale = isActive ? 'scale-100' : (absOffset === 1 ? 'scale-90' : 'scale-75');
-            
+            const scale =
+            absOffset === 0 ? 'scale-100' :
+            absOffset === 1 ? 'scale-95' :
+            absOffset === 2 ? 'scale-90' :
+            absOffset === 3 ? 'scale-85' :
+            absOffset === 4 ? 'scale-80' :
+            'scale-75';
 
-            const opacity = isActive ? 1 : (absOffset === 1 ? 0.7 : 0);
-            
+            let opacity = 1;
+            if (absOffset === 0) opacity = 1;
+            else if (absOffset === 1) opacity = 0.9;
+            else if (absOffset === 2) opacity = 0.7;
+            else if (absOffset === 3) opacity = 0.5;
+            else if (absOffset === 4) opacity = 0.3;
+            else opacity = 0;
 
             const zIndex = 50 - absOffset * 10;
             
-            const blur = isActive ? 'blur-0' : (absOffset === 1 ? 'blur-[1px]' : 'blur-md');
+            const blur =
+            absOffset === 0 ? 'blur-0' :
+            absOffset === 1 ? 'blur-[1px]' :
+            absOffset === 2 ? 'blur-sm' :
+            absOffset === 3 ? 'blur-md' :
+            absOffset === 4 ? 'blur-lg' :
+            'blur-xl';
+
 
             const handleClick = (e: React.MouseEvent) => {
               if (isActive) return;

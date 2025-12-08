@@ -17,10 +17,10 @@ export default function Navbar() {
     <>
       <nav className="w-full md:py-4 px-6 md:px-24 lg:px-52 shadow-md bg-white flex justify-between items-center">
         <Link href="/">
-          <Text unstyled className="text-2xl font-medium">KSJ</Text>
+          <Text unstyled className="text-2xl font-medium text-gray-900">KSJ</Text>
         </Link>
 
-        <Box className="hidden md:flex gap-6 text-xl font-medium">
+        <Box className="hidden md:flex gap-6 text-gray-900 text-xl font-medium">
           {NAV_LINKS.map((link) => (
             <Link key={link.href} href={link.href}>
               {link.label}
@@ -34,9 +34,9 @@ export default function Navbar() {
       </nav>
 
       <Drawer opened={opened} position="right" onClose={close} padding="md" size="xs">
-        <Box className="flex flex-col gap-6 text-lg font-medium">
+        <Box className="flex flex-col gap-6">
           {NAV_LINKS.map((link) => (
-            <Link key={link.href} href={link.href} onClick={close}>
+            <Link className="text-gray-900 text-lg font-medium" key={link.href} href={link.href} onClick={close}>
               {link.label}
             </Link>
           ))}
