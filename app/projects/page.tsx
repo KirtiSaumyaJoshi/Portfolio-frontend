@@ -1,4 +1,5 @@
 "use client";
+import { Box } from '@mantine/core';
 import { IconChevronLeft, IconChevronRight, IconExternalLink } from '@tabler/icons-react';
 import React, { useState, useCallback, useRef } from 'react';
 
@@ -71,21 +72,21 @@ export default function Projects() {
   };
 
   return (
-    <div className="flex flex-col gap-6 py-6 w-full overflow-hidden h-screen px-8 lg:px-16">
-      <div className="flex justify-center">
+    <Box className="flex flex-col gap-6 py-8 w-full overflow-hidden h-screen px-8 lg:px-16">
+      <Box className="flex justify-center">
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 tracking-tight">
           My Projects
         </h1>
-      </div>
+      </Box>
 
-      <div
+      <Box
         className="relative w-full h-[400px] md:h-[600px] flex justify-center items-center"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         onMouseDown={handleTouchStart}
         onMouseUp={handleTouchEnd}
       >
-        <div className="relative w-full h-full flex justify-center items-center">
+        <Box className="relative w-full h-full flex justify-center items-center">
           {projectData.map((project, index) => {
             const offset = getOffset(index);
             const absOffset = Math.abs(offset);
@@ -132,7 +133,7 @@ export default function Projects() {
             };
 
             return (
-              <div
+              <Box
                 key={`project-${index}`}
                 onClick={handleClick}
                 className={`
@@ -153,14 +154,14 @@ export default function Projects() {
                     visibility: opacity === 0 ? 'hidden' : 'visible',
                 }}
               >
-                <div>
-                    <h3 className={`text-2xl font-bold transition-colors duration-300 ${isActive ? 'text-gray-900' : 'text-gray-600'} line-clamp-2`}>
+                <Box>
+                    <h3 className={`text-2xl font-bold transition-colors duration-300 ${isActive ? 'text-gray-800' : 'text-gray-600'} line-clamp-2`}>
                       {project.title}
                     </h3>
                     <p className="text-gray-600 pt-4 leading-relaxed text-sm md:text-base">
                       {project.description}
                     </p>
-                </div>
+                </Box>
                 
                 <a
                   href={project.link}
@@ -180,11 +181,11 @@ export default function Projects() {
                         View Project <IconExternalLink size={18} />
                       </>
                 </a>
-              </div>
+              </Box>
             );
           })}
           
-        </div>
+        </Box>
 
         <button
           onClick={(e) => { e.stopPropagation(); goToPrev(); }}
@@ -200,7 +201,7 @@ export default function Projects() {
         >
           <IconChevronRight className="w-6 h-6" />
         </button>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 }
