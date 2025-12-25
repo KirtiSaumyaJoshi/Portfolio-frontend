@@ -1,5 +1,5 @@
 "use client";
-import { Box } from '@mantine/core';
+import { Box, Text } from '@mantine/core';
 import { IconChevronLeft, IconChevronRight, IconExternalLink } from '@tabler/icons-react';
 import React, { useState, useCallback, useRef } from 'react';
 
@@ -144,7 +144,7 @@ export default function Projects() {
                   shadow-2xl border
                   transition-all duration-500 ease-out
                   ${scale} ${blur}
-                  ${!isVisible ? 'pointer-events-none' : 'cursor-pointer'}
+                  
                   ${isActive ? 'border-blue-500 border-2' : 'border-gray-200 border-2'}
                 `}
                 style={{
@@ -158,9 +158,9 @@ export default function Projects() {
                     <h3 className={`text-2xl font-bold transition-colors duration-300 ${isActive ? 'text-gray-800' : 'text-gray-600'} line-clamp-2`}>
                       {project.title}
                     </h3>
-                    <p className="text-gray-600 pt-4 leading-relaxed text-sm md:text-base">
+                    <Text unstyled className="text-gray-600 pt-4 leading-relaxed text-sm md:text-base">
                       {project.description}
-                    </p>
+                    </Text>
                 </Box>
                 
                 <a
@@ -168,9 +168,11 @@ export default function Projects() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`
+                    ${!isVisible ? 'pointer-events-none' : 'cursor-pointer'}
                     font-semibold flex items-center gap-2 mt-4 transition-all duration-300
                     ${isActive ? 'text-blue-600 hover:text-blue-800 translate-y-0' : 'text-transparent translate-y-4'}
                   `}
+                  
                   onClick={(e) => {
                       if (!isActive) e.preventDefault();
                       e.stopPropagation();
