@@ -14,8 +14,8 @@ return (
           Design-minded developer crafting clean, intuitive web experiences.
         </Text>
       </Box>
-      <Box className="flex lg:flex-row flex-col gap-12">
-        <Box className="lg:w-1/2 relative border-2 border-gray-500 bg-amber-300 rounded-lg h-fit">
+      <Box className="flex flex-col gap-12">
+        <Box className="relative border-2 border-gray-500 bg-amber-300 rounded-lg h-fit">
           <Box className="flex flex-col gap-6 translate-x-3 translate-y-3 border-2 border-gray-900 p-4 md:p-8  w-full bg-white shadow-gray-600 shadow-lg rounded-lg h-full">
               <h2 className="text-2xl font-bold text-gray-800">
                 Education
@@ -100,7 +100,7 @@ return (
           </Box>
           
         </Box>
-        <Box className="lg:w-1/2 relative border-2 border-gray-900 bg-blue-300 rounded-lg h-fit">
+        <Box className="relative border-2 border-gray-900 bg-blue-300 rounded-lg h-fit">
           <Box className="flex flex-col gap-6 translate-x-3 translate-y-3 p-8  w-full bg-white border-2 border-gray-900 shadow-gray-600 shadow-lg rounded-lg">
               <h2 className="text-2xl font-bold text-gray-800">
                 Experience
