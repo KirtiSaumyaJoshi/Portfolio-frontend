@@ -1,16 +1,9 @@
 "use client";
 import { Box, Title } from "@mantine/core";
 import { useEffect, useState } from "react";
-import Image from "next/image";
-import CssLogo from '../../assets/css-3.svg';
-import HtmlLogo from '../../assets/html-1.svg';
-import NextLogo from '../../assets/next-js.svg';
-import JavaLogo from '../../assets/javascript-1.svg';
-import NodeLogo from '../../assets/nodejs.svg';
-import ReactLogo from '../../assets/reactjs.svg';
 
 export default function Landing() {
-  const [eatenLogos, setEatenLogos] = useState<number[]>([]);
+  const [eatenDots, setEatenDots] = useState<number[]>([]);
   const [pacmanPosition, setPacmanPosition] = useState(0);
   const [ghostsConfig, setGhostsConfig] = useState([
     { color: "red", offset: 7 },
@@ -18,140 +11,126 @@ export default function Landing() {
     { color: "cyan", offset: 15 },
     { color: "orange", offset: 19 },
   ]);
-  const logos = [
-    { src: HtmlLogo, alt: "HTML Logo" },
-    { src: CssLogo, alt: "CSS Logo" },
-    { src: JavaLogo, alt: "JavaScript Logo" },
-    { src: NextLogo, alt: "Next.js Logo" },
-    { src: NodeLogo, alt: "Node.js Logo" },
-    { src: ReactLogo, alt: "React Logo" },
-  ];
-  const [logoScale, setLogoScale] = useState(1);
 
-useEffect(() => {
-  const updateResponsiveValues = () => {
-    const width = window.innerWidth;
+  const [dotCount, setDotCount] = useState(20);
+  const [dotScale, setDotScale] = useState(1);
 
-    if (width <= 400) {
-      setGhostsConfig([
-        { color: "red", offset: 18 },
-        { color: "pink", offset: 26 },
-        { color: "cyan", offset: 34 },
-        { color: "orange", offset: 42 },
-      ]);
-      setLogoScale(0.7);
-    } 
-    else if (width <= 768) {
-      setGhostsConfig([
-        { color: "red", offset: 14 },
-        { color: "pink", offset: 20 },
-        { color: "cyan", offset: 26 },
-        { color: "orange", offset: 32 },
-      ]);
-      setLogoScale(0.8);
-    } 
-    else {
-      setGhostsConfig([
-        { color: "red", offset: 7 },
-        { color: "pink", offset: 11 },
-        { color: "cyan", offset: 15 },
-        { color: "orange", offset: 19 },
-      ]);
-      setLogoScale(1);
-    }
-  };
+  const dots = Array.from({ length: dotCount });
 
-  updateResponsiveValues();
-  window.addEventListener("resize", updateResponsiveValues);
-  return () => window.removeEventListener("resize", updateResponsiveValues);
-}, []);
+  useEffect(() => {
+    const updateResponsiveValues = () => {
+      const width = window.innerWidth;
 
-useEffect(() => {
-    
+      if (width <= 425) {
+        setDotCount(6);
+        setDotScale(0.7);
+        setGhostsConfig([
+          { color: "red", offset: 22 },
+          { color: "pink", offset: 32 },
+          { color: "cyan", offset: 42 },
+          { color: "orange", offset: 52 },
+        ]);
+      } else if (width <= 768) {
+        setDotCount(8);
+        setDotScale(0.8);
+        setGhostsConfig([
+          { color: "red", offset: 14 },
+          { color: "pink", offset: 20 },
+          { color: "cyan", offset: 26 },
+          { color: "orange", offset: 32 },
+        ]);
+      } else {
+        setDotCount(12);
+        setDotScale(1);
+        setGhostsConfig([
+          { color: "red", offset: 9 },
+          { color: "pink", offset: 14 },
+          { color: "cyan", offset: 19 },
+          { color: "orange", offset: 24 },
+        ]);
+      }
+    };
+
+    updateResponsiveValues();
+    window.addEventListener("resize", updateResponsiveValues);
+    return () => window.removeEventListener("resize", updateResponsiveValues);
+  }, []);
+
+  useEffect(() => {
     const totalDuration = 12000;
     const startTime = Date.now();
-    const numberOfLogos = logos.length;
+    const numberOfDots = dots.length;
 
-    const logoPositions = logos.map((_, index) => {
-      return ((index + 0.5) / numberOfLogos) * 100;
+    const dotPositions = dots.map((_, index) => {
+      return ((index + 0.5) / numberOfDots) * 100;
     });
 
     const animate = () => {
       const elapsed = Date.now() - startTime;
       const progress = (elapsed % totalDuration) / totalDuration;
-      const currentPosition = progress * 100; 
-      
+      const currentPosition = progress * 100;
+
       setPacmanPosition(currentPosition);
 
-      const newEatenLogos: number[] = [];
-      
-      const vacuumOffset = 1.8; 
+      const newEatenDots: number[] = [];
+      const vacuumOffset = 1.2;
 
-      logoPositions.forEach((logoPos, index) => {
-
-        if (currentPosition >= logoPos - vacuumOffset) {
-          newEatenLogos.push(index);
+      dotPositions.forEach((dotPos, index) => {
+        if (currentPosition >= dotPos - vacuumOffset) {
+          newEatenDots.push(index);
         }
       });
-      setEatenLogos(newEatenLogos);
+
+      setEatenDots(newEatenDots);
 
       if (progress >= 0.99) {
-         setEatenLogos([]);
+        setEatenDots([]);
       }
 
-      const animationFrame = requestAnimationFrame(animate);
-      return () => cancelAnimationFrame(animationFrame);
+      requestAnimationFrame(animate);
     };
 
     const animationFrame = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(animationFrame);
+  }, [dotCount]);
 
-  }, [logos.length]);
-
-const getGhostPosition = (offset: number): number => {
+  const getGhostPosition = (offset: number): number => {
     let position = pacmanPosition - offset;
-    if (position < 0) {
-      position += 100; 
-    }
+    if (position < 0) position += 100;
     return position;
   };
 
   return (
     <Box className="w-full flex flex-col relative">
-      <Box className="lg:h-screen h-[60vh]  w-full relative px-6 lg:px-16 flex items-center justify-center overflow-hidden">
+      <Box className="lg:h-screen h-[80vh] w-full relative px-6 lg:px-16 flex items-center justify-center overflow-hidden">
         <Box className="w-full">
-      
           <Box className="w-full flex justify-center items-center">
-            <Title unstyled order={1} className="lg:text-[148px] text-5xl text-gray-900 font-black text-center">
+            <Title
+              unstyled
+              order={1}
+              className="lg:text-[148px] text-7xl text-gray-900 font-black text-center"
+            >
               Kirti Saumya Joshi.
             </Title>
           </Box>
 
           <Box className="relative w-full h-32">
-            <Box className="absolute inset-0 flex justify-around items-center ">
-              {logos.map((logo, index) => {
-                const isEaten = eatenLogos.includes(index);
+            <Box className="absolute inset-0 flex justify-around items-center">
+              {dots.map((_, index) => {
+                const isEaten = eatenDots.includes(index);
+
                 return (
                   <Box
                     key={index}
-                    className="transition-all duration-300" 
+                    className="transition-all duration-300"
                     style={{
-                            width: `${50 * logoScale}px`,
-                            height: `${50 * logoScale}px`,
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            opacity: isEaten ? 0 : 1,
-                            transform: isEaten ? `scale(0)` : `scale(${logoScale})`,
-                          }}
-                  >
-                    <Image
-                      className="w-full h-full"
-                      src={logo.src}
-                      alt={logo.alt}
-                      style={{ transition: 'none' }} 
-                    />
-                  </Box>
+                      width: `${10 * dotScale}px`,
+                      height: `${10 * dotScale}px`,
+                      backgroundColor: "#7d7d7d",
+                      opacity: isEaten ? 0 : 1,
+                      transform: isEaten ? "scale(0)" : "scale(1)",
+                    }}
+                  />
                 );
               })}
             </Box>
@@ -159,45 +138,47 @@ const getGhostPosition = (offset: number): number => {
             <Box
               className="absolute top-1/2"
               style={{
-                left: `${pacmanPosition}%`, 
-                transform: `translateY(-50%) translateX(-50%) scale(2)`,
-                transition: "none", 
+                left: `${pacmanPosition}%`,
+                transform: "translate(-50%, -50%) scale(2)",
+                transition: "none",
               }}
             >
               <Box className="pacman">
-                <Box className="offset-pacman"></Box>
+                <Box className="offset-pacman" />
               </Box>
-              
             </Box>
+
             {ghostsConfig.map((ghost, idx) => {
-                const ghostPosition = getGhostPosition(ghost.offset);
-                return (
-                    <Box
-                      key={idx}
-                      className="absolute top-1/2"
-                      style={{
-                        left: `${ghostPosition}%`,
-                      }}
-                    >
-                      <Box 
-                        className="ghost-body" 
-                        style={{ background: ghost.color }}>
-                        <Box className="ghost-eyes">
-                          <Box className="ghost-eye left"></Box>
-                          <Box className="ghost-eye right"></Box>
-                        </Box>
-                        <Box className="ghost-pupils">
-                          <Box className="ghost-pupil left"></Box>
-                          <Box className="ghost-pupil right"></Box>
-                        </Box>
-                        <Box className="ghost-skirt">
-                          <Box className="skirt-point"></Box>
-                          <Box className="skirt-point"></Box>
-                          <Box className="skirt-point"></Box>
-                        </Box>
-                      </Box>
+              const ghostPosition = getGhostPosition(ghost.offset);
+
+              return (
+                <Box
+                  key={idx}
+                  className="absolute top-1/2"
+                  style={{
+                    left: `${ghostPosition}%`,
+                  }}
+                >
+                  <Box
+                    className="ghost-body"
+                    style={{ background: ghost.color }}
+                  >
+                    <Box className="ghost-eyes">
+                      <Box className="ghost-eye left" />
+                      <Box className="ghost-eye right" />
                     </Box>
-                );
+                    <Box className="ghost-pupils">
+                      <Box className="ghost-pupil left" />
+                      <Box className="ghost-pupil right" />
+                    </Box>
+                    <Box className="ghost-skirt">
+                      <Box className="skirt-point" />
+                      <Box className="skirt-point" />
+                      <Box className="skirt-point" />
+                    </Box>
+                  </Box>
+                </Box>
+              );
             })}
           </Box>
         </Box>

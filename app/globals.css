@@ -123,11 +123,11 @@ body {
       
   @media (max-width: 768px) {
   .offset-pacman {
-    transform: translate(-16px, -16px) scale(0.75);
+    transform: translate(-16px, -16px) scale(0.70);
   }
 
   .ghost-body {
-    transform: scale(0.75);
+    transform: scale(0.65);
   }
 }
 
