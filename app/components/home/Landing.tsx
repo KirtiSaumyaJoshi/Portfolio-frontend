@@ -1,6 +1,7 @@
 "use client";
 import { Box, Title } from "@mantine/core";
 import { useEffect, useState } from "react";
+import DeveloperCLock from "./components/developerClock";
 
 export default function Landing() {
   const [eatenDots, setEatenDots] = useState<number[]>([]);
@@ -102,15 +103,15 @@ export default function Landing() {
 
   return (
     <Box className="w-full flex flex-col relative">
-      <Box className="lg:h-screen h-[80vh] w-full relative px-6 lg:px-16 flex items-center justify-center overflow-hidden">
-        <Box className="w-full">
+      <Box className="lg:h-screen h-[80vh] w-full relative px-6 lg:px-16 flex items-center justify-center overflow-hidden border-gray-500 border-b-2">
+        <Box className="w-full flex flex-col gap-12">
           <Box className="w-full flex justify-center items-center">
             <Title
               unstyled
               order={1}
-              className="lg:text-[148px] text-7xl text-gray-900 font-black text-center"
+              className="lg:text-[128px] text-7xl font-black text-center text-[#1B1B1B]"
             >
-              Kirti Saumya Joshi.
+              KIRTI SAUMYA JOSHI
             </Title>
           </Box>
 
@@ -126,7 +127,7 @@ export default function Landing() {
                     style={{
                       width: `${10 * dotScale}px`,
                       height: `${10 * dotScale}px`,
-                      backgroundColor: "#7d7d7d",
+                      backgroundColor: "#5a5a5a",
                       opacity: isEaten ? 0 : 1,
                       transform: isEaten ? "scale(0)" : "scale(1)",
                     }}
@@ -183,6 +184,7 @@ export default function Landing() {
           </Box>
         </Box>
       </Box>
+        <DeveloperCLock/>
     </Box>
   );
 }

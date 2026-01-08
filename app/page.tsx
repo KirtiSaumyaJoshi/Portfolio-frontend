@@ -7,9 +7,6 @@ export default function Home() {
   return (
     <Box className="w-full h-full">
       <Landing/>
-      <Box className="h-screen">
-
-      </Box>
     </Box>
   );
 }
