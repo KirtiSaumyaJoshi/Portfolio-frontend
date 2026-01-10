@@ -3,7 +3,6 @@ import { useDisclosure } from "@mantine/hooks";
 import { Box, Burger, Drawer, Text, Button } from "@mantine/core";
 import Link from "next/link";
 import { useState } from "react";
-
 const NAV_LINKS = [
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
@@ -32,7 +31,7 @@ export default function Navbar() {
 
           <Button
             component="a"
-            href="/resume.pdf"
+            href="/Kirti Saumya Joshi - CV.pdf"
             download
             color="dark"
             size="lg"
@@ -63,13 +62,17 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-
-          <Button
+            <Button
             component="a"
-            href="/resume.pdf"
+            href="/Kirti Saumya Joshi - CV.pdf"
             download
-            variant="subtle"
-            onClick={close}
+            color="dark"
+            size="md"
+            radius="xl"
+            variant={hovered ? "outline" : "filled"} 
+            classNames={{ label: "text-lg font-medium" }}
+            onMouseEnter={() => setHovered(true)}
+            onMouseLeave={() => setHovered(false)}
           >
             Resume Download
           </Button>
