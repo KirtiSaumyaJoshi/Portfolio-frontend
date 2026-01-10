@@ -103,7 +103,7 @@ export default function Landing() {
 
   return (
     <Box className="w-full flex flex-col relative">
-      <Box className="lg:h-screen h-[80vh] w-full relative px-6 lg:px-16 flex items-center justify-center overflow-hidden border-gray-500 border-b-2">
+      <Box className="lg:h-screen h-[80vh] w-full relative px-6 lg:px-16 flex items-center justify-center overflow-hidden bg-[#f7f7fc]">
         <Box className="w-full flex flex-col gap-12">
           <Box className="w-full flex justify-center items-center">
             <Title

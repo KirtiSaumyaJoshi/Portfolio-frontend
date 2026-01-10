@@ -5,7 +5,7 @@ import TU from "../assets/TU.png"
 import Company from "../assets/techaxis.webp"
 export default function About() {
 return (
-    <Box className="w-full px-6 md:px-8 py-8 flex flex-col gap-8">
+    <Box className="w-full px-6 md:px-8 py-8 flex flex-col gap-8 bg-[#f7f7fc]">
       <Box className="flex flex-col justify-center text-center gap-3">
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 tracking-tight">
           About me
@@ -17,7 +17,7 @@ return (
       <Box className="flex flex-col gap-12">
         <Box className="relative border-2 border-gray-500 bg-amber-300 rounded-lg h-fit">
           <Box className="flex flex-col gap-6 translate-x-3 translate-y-3 border-2 border-gray-900 p-4 md:p-8  w-full bg-white shadow-gray-600 shadow-lg rounded-lg h-full">
-              <h2 className="text-2xl font-bold text-gray-800">
+              <h2 className="text-2xl font-bold text-[#1B1B1B]">
                 Education
               </h2>
               <Box className="bg-gray-100 p-4 rounded-lg">
@@ -102,7 +102,7 @@ return (
         </Box>
         <Box className="relative border-2 border-gray-900 bg-blue-300 rounded-lg h-fit">
           <Box className="flex flex-col gap-6 translate-x-3 translate-y-3 p-8  w-full bg-white border-2 border-gray-900 shadow-gray-600 shadow-lg rounded-lg">
-              <h2 className="text-2xl font-bold text-gray-800">
+              <h2 className="text-2xl font-bold text-[#1B1B1B]">
                 Experience
               </h2>
               <Box className="bg-gray-100 p-4 rounded-lg">

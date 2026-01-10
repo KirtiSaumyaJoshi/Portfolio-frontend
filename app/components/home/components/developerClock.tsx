@@ -39,11 +39,11 @@ export default function DeveloperCLock() {
   if (!mounted) return null;
 
   return (
-    <Box className="w-full h-screen px-6 lg:px-16 flex flex-col items-center gap-6 lg:gap-24 justify-center text-center">
+    <Box className="w-full h-screen px-6 lg:px-16 flex flex-col items-center gap-6 lg:gap-16 justify-center text-center">
       <Title
         unstyled
         order={2}
-        className="lg:text-[84px] text-5xl font-bold text-gray-900 leading-15"
+        className="lg:text-[64px] text-5xl font-bold text-gray-900"
       >
         Time Spent Building as a Developer
       </Title>
@@ -58,18 +58,18 @@ export default function DeveloperCLock() {
             ].map(({ label, value }) => (
             <Box
                 key={label}
-                className="flex flex-col items-center px-3 py-2 lg:px-6 lg:py-4 rounded-xl bg-gray-100 min-w-[110px]"
+                className="flex flex-col items-center px-3 py-2 lg:px-6 lg:py-4 rounded-xl bg-gray-100 shadow-lg shadow-gray-150"
             >
                 <span className="text-xl lg:text-[152px] font-mono font-bold text-[#1B1B1B]">
                 {String(value).padStart(2, "0")}
                 </span>
-                <span className="text-xs lg:text-sm uppercase tracking-wide text-gray-500">
+                <span className="text-xs lg:text-sm uppercase tracking-wide text-[#1B1B1B]">
                 {label}
                 </span>
             </Box>
             ))}
             </Box>
-            <Text unstyled className=" text-gray-500 text-lg">
+            <Text unstyled className=" text-[#1B1B1B] text-lg">
                 Started March 2024 · Still counting
             </Text>
         </Box>

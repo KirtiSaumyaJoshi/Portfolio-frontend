@@ -72,9 +72,9 @@ export default function Projects() {
   };
 
   return (
-    <Box className="flex flex-col gap-6 py-8 w-full overflow-hidden h-screen px-8 lg:px-16">
+    <Box className="flex flex-col gap-6 py-8 w-full overflow-hidden h-screen px-8 lg:px-16 bg-[#f7f7fc]">
       <Box className="flex justify-center">
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 tracking-tight">
+        <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-[#1B1B1B] tracking-tight">
           My Projects
         </h1>
       </Box>
@@ -155,10 +155,10 @@ export default function Projects() {
                 }}
               >
                 <Box>
-                    <h3 className={`text-2xl font-bold transition-colors duration-300 ${isActive ? 'text-gray-800' : 'text-gray-600'} line-clamp-2`}>
+                    <h3 className={`text-2xl font-bold transition-colors duration-300 ${isActive ? 'text-[#1B1B1B]' : 'text-gray-600'} line-clamp-2`}>
                       {project.title}
                     </h3>
-                    <Text unstyled className="text-gray-600 pt-4 leading-relaxed text-sm md:text-base">
+                    <Text unstyled className="text-[#1B1B1B] pt-4 leading-relaxed text-sm md:text-base">
                       {project.description}
                     </Text>
                 </Box>
@@ -191,14 +191,14 @@ export default function Projects() {
 
         <button
           onClick={(e) => { e.stopPropagation(); goToPrev(); }}
-          className="absolute hidden md:flex items-center justify-center left-4 md:left-12 z-60 p-4 bg-white/90 backdrop-blur-md rounded-full shadow-xl hover:scale-110 transition-all border border-gray-100 group text-gray-700 hover:text-blue-600"
+          className="absolute hidden md:flex items-center justify-center left-4 md:left-12 z-60 p-4 bg-white/90 backdrop-blur-md rounded-full shadow-xl hover:scale-110 transition-all border border-gray-100 group text-[#1B1B1B] hover:text-blue-600"
           aria-label="Previous Project"
         >
           <IconChevronLeft className="w-6 h-6" />
         </button>
         <button
           onClick={(e) => { e.stopPropagation(); goToNext(); }}
-          className="absolute hidden md:flex items-center justify-center right-4 md:right-12 z-60 p-4 bg-white/90 backdrop-blur-md rounded-full shadow-xl hover:scale-110 transition-all border border-gray-100 group text-gray-700 hover:text-blue-600"
+          className="absolute hidden md:flex items-center justify-center right-4 md:right-12 z-60 p-4 bg-white/90 backdrop-blur-md rounded-full shadow-xl hover:scale-110 transition-all border border-gray-100 group text-[#1B1B1B] hover:text-blue-600"
           aria-label="Next Project"
         >
           <IconChevronRight className="w-6 h-6" />
