@@ -4,7 +4,7 @@ import { Box, Burger, Drawer, Text, Button } from "@mantine/core";
 import Link from "next/link";
 import { useState } from "react";
 const NAV_LINKS = [
-  { label: "About", href: "/about" },
+  { label: "Professional Summary", href: "/professional-summary" },
   { label: "Contact", href: "/contact" },
   { label: "Projects", href: "/projects" },
 ];

@@ -1,33 +1,42 @@
 "use client";
-import { Box, Text } from '@mantine/core';
+import { Box, Image, Text } from '@mantine/core';
 import { IconChevronLeft, IconChevronRight, IconExternalLink } from '@tabler/icons-react';
 import React, { useState, useCallback, useRef } from 'react';
-
+import  RemoteAxle  from "../assets/Projects/Remoteaxle.png"
+import  Everesteducator  from "../assets/Projects/EverestEducators.png"
+import  JobAxle  from "../assets/Projects/JobAxle.png"
+import  RemotelyLearn  from "../assets/Projects/RemotelyLearn.png"
+import  ebookingNepal  from "../assets/Projects/eBookingNepal.png"
 const projectData = [
   {
     title: 'RemoteAxle',
     description: 'An e-learning platform designed to facilitate self-paced online education. The website features a user-friendly interface for browsing courses, tracking student progress through personalized dashboards, and issuing digital certificates upon completion. It supports various learning formats including video lessons, quizzes, and workshops.',
     link: 'https://remoteaxle.com/',
+    image: RemoteAxle
   },
   {
     title: 'Everest Educators',
     description: 'A professional educational website for a tutoring and enrichment center focused on children. The platform showcases services such as coding classes and subject-specific tutoring. It includes features for parent engagement, such as success stories, reviews, and a direct appointment booking system to streamline enrollment.',
     link: 'https://everesteduacademy.ca/',
+    image: Everesteducator
   },
   {
     title: 'Remotely Learn',
     description: 'An educational platform and coding bootcamp designed to guide students in becoming software engineers. The website emphasizes a practical curriculum with project-based learning and live online classes. It includes features for prospective students to browse and apply for bootcamps, as well as a recruitment portal for companies to hire graduates.',
     link: 'https://remotelylearn.com/',
+    image: RemotelyLearn
   },
   {
     title: 'JobAxle',
     description: 'A specialized job portal tailored for the IT, engineering, and management sectors. The platform connects job seekers with employers through advanced search functionality, allowing users to filter by job title, type, and level. It features a robust listing system for "Premium Jobs" and provides tools for employers to post and manage job openings.',
     link: 'https://jobaxle.com/',
+    image: JobAxle
   },
   {
     title: 'eBooking Nepal',
     description: 'A comprehensive travel and accommodation booking engine focused on the Nepalese tourism market. The platform allows users to search, compare, and reserve various accommodations (hotels, resorts, homestays) and vehicle rentals. It features a dynamic search interface with filters for dates, guests, and property types to simplify travel planning.',
     link: 'https://ebookingnepal.com/',
+    image: ebookingNepal
   },
 ];
 
@@ -154,13 +163,24 @@ export default function Projects() {
                     visibility: opacity === 0 ? 'hidden' : 'visible',
                 }}
               >
-                <Box>
-                    <h3 className={`text-2xl font-bold transition-colors duration-300 ${isActive ? 'text-[#1B1B1B]' : 'text-gray-600'} line-clamp-2`}>
+                <Box
+                className="absolute z-0 inset-0 bg-cover bg-center"
+                style={{
+                  backgroundImage: `url(${project?.image?.src})`,
+                  filter: "blur(10px)",
+                  zIndex: 0,
+                }}
+              />
+              <Box className='flex flex-col items-center justify-center z-10'>
+                <Box className='flex flex-col gap-2'>
+                    <h3 className={`text-2xl font-bold text-center transition-colors duration-300 ${isActive ? 'text-[#1B1B1B]' : 'text-gray-600'} line-clamp-2`}>
                       {project.title}
                     </h3>
-                    <Text unstyled className="text-[#1B1B1B] pt-4 leading-relaxed text-sm md:text-base">
-                      {project.description}
-                    </Text>
+                    <Box className='p-5 bg-gray-50 rounded-2xl'>
+                      <Text unstyled className="text-[#1B1B1B] leading-relaxed text-sm md:text-base">
+                        {project.description}
+                      </Text>
+                    </Box>
                 </Box>
                 
                 <a
@@ -179,10 +199,9 @@ export default function Projects() {
                   }}
                   tabIndex={isActive ? 0 : -1}
                 >
-                      <>
                         View Project <IconExternalLink size={18} />
-                      </>
                 </a>
+                </Box>
               </Box>
             );
           })}
