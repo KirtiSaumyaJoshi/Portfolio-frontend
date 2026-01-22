@@ -14,7 +14,7 @@ export default function Navbar() {
   const [hovered, setHovered] = useState(false);
   return (
     <>
-      <nav className="w-full md:py-4 px-6 md:px-24 lg:px-52 shadow-md bg-white flex justify-between items-center sticky top-0 z-50">
+      <nav className="w-full md:py-4 px-6 md:px-24 shadow-md bg-white flex justify-between items-center sticky top-0 z-50">
         <Link href="/">
           <Text unstyled className="text-2xl font-medium text-[#1B1B1B]">
             KSJ
