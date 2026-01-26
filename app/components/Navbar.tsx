@@ -33,11 +33,11 @@ export default function Navbar() {
             component="a"
             href="/Kirti Saumya Joshi - CV.pdf"
             download
-            color="dark"
+            color="oklch(80.9% 0.105 251.813)"
             size="lg"
             radius="xl"
             variant={hovered ? "outline" : "filled"} 
-            classNames={{ label: "text-xl font-medium" }}
+            classNames={{ label: "text-xl text-[#1B1B1B] font-medium" }}
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
           >
