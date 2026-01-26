@@ -1,5 +1,5 @@
 "use client";
-import { Box, Image, Text } from '@mantine/core';
+import { Box, Text } from '@mantine/core';
 import { IconChevronLeft, IconChevronRight, IconExternalLink } from '@tabler/icons-react';
 import React, { useState, useCallback, useRef } from 'react';
 import  RemoteAxle  from "../assets/Projects/Remoteaxle.png"
@@ -164,12 +164,8 @@ export default function Projects() {
                 }}
               >
                 <Box
-                className="absolute z-0 inset-0 bg-cover bg-center"
-                style={{
-                  backgroundImage: `url(${project?.image?.src})`,
-                  filter: "blur(10px)",
-                  zIndex: 0,
-                }}
+                className="absolute z-0"
+                
               />
               <Box className='flex flex-col items-center justify-center z-10'>
                 <Box className='flex flex-col gap-2'>
