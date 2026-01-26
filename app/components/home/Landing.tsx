@@ -2,6 +2,7 @@
 import { Box, Title } from "@mantine/core";
 import { useEffect, useState } from "react";
 import DeveloperCLock from "./components/developerClock";
+import Education from "./components/education";
 
 export default function Landing() {
   const [eatenDots, setEatenDots] = useState<number[]>([]);
@@ -185,6 +186,7 @@ export default function Landing() {
         </Box>
       </Box>
         <DeveloperCLock/>
+        <Education/>
     </Box>
   );
 }
