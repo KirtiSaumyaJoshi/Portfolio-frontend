@@ -3,6 +3,8 @@ import { useDisclosure } from "@mantine/hooks";
 import { Box, Burger, Drawer, Text, Button } from "@mantine/core";
 import Link from "next/link";
 import { useState } from "react";
+import RollingButton from "./button-component/RotateButton";
+import { IconDownload, IconFileDownload } from "@tabler/icons-react";
 const NAV_LINKS = [
   { label: "Professional Summary", href: "/professional-summary" },
   { label: "Contact", href: "/contact" },
@@ -14,7 +16,7 @@ export default function Navbar() {
   const [hovered, setHovered] = useState(false);
   return (
     <>
-      <nav className="w-full md:py-4 px-6 md:px-24 shadow-md bg-white flex justify-between items-center sticky top-0 z-50">
+      <nav className="w-full lg:h-[90px] md:py-4 px-6 md:px-24 shadow-md bg-white flex justify-between items-center sticky top-0 z-50">
         <Link href="/">
           <Text unstyled className="text-2xl font-medium text-[#1B1B1B]">
             KSJ
@@ -29,17 +31,20 @@ export default function Navbar() {
             </Link>
           ))}
 
-          <Button
-            component="a"
-            href="/Kirti Saumya Joshi - CV.pdf"
-            download
-            unstyled
-            classNames={{ label: "text-xl text-[#1B1B1B] font-medium",root:"border-2 border-black bg-[#ABE2FF] px-4 py-2 rounded-full" }}
-            onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}
-          >
-            Resume Download
-          </Button>
+          <RollingButton 
+      frontContent={
+        <>
+          <span>Download CV</span>
+        </>
+      } 
+      backContent={
+        <>
+          <IconFileDownload size={20} />
+        </>
+      } 
+      href="/resume.pdf"
+      download
+    />
         </Box>
 
         <Box className="md:hidden p-2 rounded-md">
