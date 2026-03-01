@@ -4,7 +4,7 @@ import { Box, Burger, Drawer, Text, Button } from "@mantine/core";
 import Link from "next/link";
 import { useState } from "react";
 import RollingButton from "./button-component/RotateButton";
-import { IconDownload, IconFileDownload } from "@tabler/icons-react";
+import { IconFileDownload } from "@tabler/icons-react";
 const NAV_LINKS = [
   { label: "Professional Summary", href: "/professional-summary" },
   { label: "Contact", href: "/contact" },
@@ -24,9 +24,9 @@ export default function Navbar() {
         </Link>
 
         
-        <Box className="hidden md:flex gap-6 text-[#1B1B1B] text-xl font-medium items-center">
+        <Box className="hidden md:flex gap-6 text-[#1B1B1B]  items-center">
           {NAV_LINKS.map((link) => (
-            <Link key={link.href} href={link.href}>
+            <Link className="text-lg font-extralight" key={link.href} href={link.href}>
               {link.label}
             </Link>
           ))}
