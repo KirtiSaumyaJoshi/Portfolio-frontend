@@ -2,11 +2,11 @@
 import { Box, Text } from '@mantine/core';
 import { IconChevronLeft, IconChevronRight, IconExternalLink } from '@tabler/icons-react';
 import React, { useState, useCallback, useRef } from 'react';
-import  RemoteAxle  from "../assets/Projects/Remoteaxle.png"
-import  Everesteducator  from "../assets/Projects/EverestEducators.png"
-import  JobAxle  from "../assets/Projects/JobAxle.png"
-import  RemotelyLearn  from "../assets/Projects/RemotelyLearn.png"
-import  ebookingNepal  from "../assets/Projects/eBookingNepal.png"
+import  RemoteAxle  from "../../../assets/Projects/Remoteaxle.png"
+import  Everesteducator  from "../../../assets/Projects/EverestEducators.png"
+import  JobAxle  from "../../../assets/Projects/JobAxle.png"
+import  RemotelyLearn  from "../../../assets/Projects/RemotelyLearn.png"
+import  ebookingNepal  from "../../../assets/Projects/EverestEducators.png"
 const projectData = [
   {
     title: 'RemoteAxle',

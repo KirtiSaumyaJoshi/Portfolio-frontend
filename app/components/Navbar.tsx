@@ -6,9 +6,7 @@ import { useState } from "react";
 import RollingButton from "./button-component/RotateButton";
 import { IconFileDownload } from "@tabler/icons-react";
 const NAV_LINKS = [
-  { label: "Professional Summary", href: "/professional-summary" },
   { label: "Contact", href: "/contact" },
-  { label: "Projects", href: "/projects" },
 ];
 
 export default function Navbar() {
