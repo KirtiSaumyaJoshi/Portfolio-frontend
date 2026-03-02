@@ -6,6 +6,10 @@ import { useState } from "react";
 import RollingButton from "./button-component/RotateButton";
 import { IconFileDownload } from "@tabler/icons-react";
 const NAV_LINKS = [
+  { label: "Professional Summary", href: "/" },
+  { label: "Projects", href: "/" },
+  { label: "Education", href: "/" },
+  { label: "Education", href: "/" },
   { label: "Contact", href: "/contact" },
 ];
 
@@ -14,12 +18,13 @@ export default function Navbar() {
   const [hovered, setHovered] = useState(false);
   return (
     <>
-      <nav className="w-full lg:h-[90px] md:py-4 px-6 md:px-24 shadow-md bg-white flex justify-between items-center sticky top-0 z-100">
+      <nav className="w-full lg:h-[90px] md:py-4 px-6 md:px-24 shadow-md bg-white flex justify-between items-center sticky top-0 z-50">
         <Link href="/">
           <Text unstyled className="text-2xl font-medium text-[#1B1B1B]">
             KSJ
           </Text>
         </Link>
+
         
         <Box className="hidden md:flex gap-6 text-[#1B1B1B]  items-center">
           {NAV_LINKS.map((link) => (
