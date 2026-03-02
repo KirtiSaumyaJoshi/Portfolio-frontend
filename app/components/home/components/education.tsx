@@ -4,7 +4,7 @@ import TU from "../../../assets/TU.png"
 import Image from "next/image";
 export default function Education(){
     return(
-    <Box className=" px-6 lg:px-16 py-16 flex flex-col gap-8 items-center justify-center bg-[#f7f7fc]">
+    <Box id="education" className=" px-6 lg:px-16 py-16 flex flex-col gap-8 items-center justify-center bg-[#f7f7fc]">
        <Title
                unstyled
                order={2}

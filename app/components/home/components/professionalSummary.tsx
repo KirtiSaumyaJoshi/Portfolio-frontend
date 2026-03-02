@@ -4,7 +4,7 @@ import Image from "next/image";
 import Company from "../../../assets/techaxis.webp"
 export default function ProfessionalSummary() {
 return (
-    <Box className="w-full px-6 md:px-8 py-16 flex flex-col gap-8 bg-[#f7f7fc]">
+    <Box id="professionalsummary" className="w-full px-6 md:px-8 py-16 flex flex-col gap-8 bg-[#f7f7fc]">
       <Box className="flex flex-col justify-center text-center gap-1 lg:gap-3">
         <h1 className="text-xl lg:text-4xl font-extrabold text-gray-900 tracking-tight">
           Professional Summary

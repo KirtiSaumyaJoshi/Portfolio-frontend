@@ -13,7 +13,6 @@ export default function Main() {
         <Projects/>
         <Education/>
         <DeveloperCLock/>
-
     </>
         
   );

@@ -81,7 +81,7 @@ export default function Projects() {
   };
 
   return (
-    <Box className="flex flex-col gap-6 py-16 w-full overflow-hidden px-8 lg:px-16">
+    <Box id="projects" className="flex flex-col gap-6 py-16 w-full overflow-hidden px-8 lg:px-16">
       <Box className="flex justify-center">
         <h1 className="text-xl lg:text-4xl font-extrabold text-[#1B1B1B] tracking-tight">
           My Projects
