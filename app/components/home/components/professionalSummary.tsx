@@ -1,15 +1,15 @@
 import { Box, Text } from "@mantine/core";
 import Image from "next/image";
 
-import Company from "../assets/techaxis.webp"
+import Company from "../../../assets/techaxis.webp"
 export default function ProfessionalSummary() {
 return (
-    <Box className="w-full px-6 md:px-8 py-8 flex flex-col gap-8 bg-[#f7f7fc]">
-      <Box className="flex flex-col justify-center text-center gap-3">
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-gray-900 tracking-tight">
+    <Box className="w-full px-6 md:px-8 py-16 flex flex-col gap-8 bg-[#f7f7fc]">
+      <Box className="flex flex-col justify-center text-center gap-1 lg:gap-3">
+        <h1 className="text-xl lg:text-4xl font-extrabold text-gray-900 tracking-tight">
           Professional Summary
         </h1>
-        <Text unstyled className="text-lg font-medium">
+        <Text unstyled className="text-md lg:text-lg font-medium">
           Design-minded developer crafting clean, intuitive web experiences.
         </Text>
       </Box>
@@ -46,9 +46,7 @@ return (
                     
                     <Text unstyled className="text-gray-600 leading-relaxed text-sm md:text-base">
                       Contributed to the development of responsive web applications by building reusable UI components, integrating REST APIs, and collaborating with senior developers, designers, and QA teams to improve performance, fix bugs, and deliver high-quality, user-focused features using React, Next.js, Node.js, and modern CSS frameworks.
-                    </Text>
-
-                    
+                    </Text>     
                   </Box>
                 </Box>
               </Box>
