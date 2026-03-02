@@ -20,7 +20,6 @@ export default function RootLayout({
         >
           <ModalsProvider >
             <Notifications />
-            <Navbar />
             {children}
           </ModalsProvider>
         </MantineProvider>

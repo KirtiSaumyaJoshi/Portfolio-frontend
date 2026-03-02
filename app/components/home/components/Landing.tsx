@@ -100,7 +100,7 @@
       return position;
     };
   return (
-  <Box className="lg:h-screen h-[80vh] w-full relative px-6 lg:px-16 flex items-center justify-center overflow-hidden ">
+  <Box id="landing" className="lg:h-screen h-[80vh] w-full relative px-6 lg:px-16 flex items-center justify-center overflow-hidden ">
     <Box className="w-full flex flex-col gap-12">
               <Box className="w-full flex justify-center items-center">
                 <Title

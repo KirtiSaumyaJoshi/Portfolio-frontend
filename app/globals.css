@@ -1,5 +1,7 @@
 @import "tailwindcss";
-
+html {
+  scroll-behavior: smooth;
+}
 body {
     font-family: "Merriweather", serif;
     margin: 0;
