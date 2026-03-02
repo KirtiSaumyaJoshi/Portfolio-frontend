@@ -81,15 +81,15 @@ export default function Projects() {
   };
 
   return (
-    <Box className="flex flex-col gap-6 py-8 w-full overflow-hidden h-screen px-8 lg:px-16 bg-[#f7f7fc]">
+    <Box className="flex flex-col gap-6 py-16 w-full overflow-hidden px-8 lg:px-16">
       <Box className="flex justify-center">
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-[#1B1B1B] tracking-tight">
+        <h1 className="text-xl lg:text-4xl font-extrabold text-[#1B1B1B] tracking-tight">
           My Projects
         </h1>
       </Box>
 
       <Box
-        className="relative w-full h-[400px] md:h-[600px] flex justify-center items-center"
+        className="relative w-full mt-4 h-[400px] md:h-[520px] flex justify-center items-center"
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         onMouseDown={handleTouchStart}
@@ -103,7 +103,7 @@ export default function Projects() {
             const isVisible = absOffset <= 4;
 
             const isActive = offset === 0;
-            const heightClass = isActive ? 'h-[400px] md:h-[450px]' : 'h-[380px] md:h-[400px]';
+            const heightClass = isActive ? 'h-[430px] md:h-[450px]' : 'h-[380px] md:h-[400px]';
 
             const translateX = `translateX(${offset * 70}%)`;
 
