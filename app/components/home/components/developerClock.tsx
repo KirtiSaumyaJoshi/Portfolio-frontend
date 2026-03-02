@@ -39,7 +39,7 @@ export default function DeveloperCLock() {
   if (!mounted) return null;
 
   return (
-    <Box className="w-full px-6 lg:px-8 py-16 flex flex-col items-center gap-6 lg:gap-12 justify-center text-center">
+    <Box id="counter" className="w-full px-6 lg:px-8 py-16 flex flex-col items-center gap-6 lg:gap-12 justify-center text-center">
       <Box className="flex flex-col gap-1 lg:gap-3">
         <Title
           unstyled
