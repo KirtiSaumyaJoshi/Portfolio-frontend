@@ -39,15 +39,21 @@ export default function DeveloperCLock() {
   if (!mounted) return null;
 
   return (
-    <Box className="w-full h-screen px-6 lg:px-16 flex flex-col items-center gap-6 lg:gap-16 justify-center text-center">
-      <Title
-        unstyled
-        order={2}
-        className="lg:text-[64px] text-5xl font-bold text-gray-900"
-      >
-        Time Spent Building as a Developer
-      </Title>
-        <Box className="flex flex-col gap-6 lg:gap-12">
+    <Box className="w-full px-6 lg:px-8 py-16 flex flex-col items-center gap-6 lg:gap-12 justify-center text-center">
+      <Box className="flex flex-col gap-1 lg:gap-3">
+        <Title
+          unstyled
+          order={2}
+          className="text-xl lg:text-4xl font-extrabold text-gray-900 tracking-tight"
+        >
+          Time Spent Building as a Developer
+        </Title>
+        <Text unstyled className="text-[#1B1B1B] text-md lg:text-lg">
+            Started March 2024 · Still counting
+        </Text>
+      </Box>
+      
+        <Box className="flex flex-col gap-6">
             <Box className="flex w-full gap-6 flex-wrap justify-center">
             {[
             { label: "Years", value: time.years },
@@ -69,9 +75,7 @@ export default function DeveloperCLock() {
             </Box>
             ))}
             </Box>
-            <Text unstyled className=" text-[#1B1B1B] text-lg">
-                Started March 2024 · Still counting
-            </Text>
+            
         </Box>
       
     </Box>

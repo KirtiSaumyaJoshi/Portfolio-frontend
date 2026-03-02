@@ -4,11 +4,11 @@ import TU from "../../../assets/TU.png"
 import Image from "next/image";
 export default function Education(){
     return(
-    <Box className=" px-6 lg:px-16 h-screen flex flex-col gap-16 items-center justify-center bg-[#f7f7fc]">
+    <Box className=" px-6 lg:px-16 py-16 flex flex-col gap-8 items-center justify-center bg-[#f7f7fc]">
        <Title
                unstyled
                order={2}
-               className="lg:text-[64px] text-5xl font-bold text-gray-900"
+               className="text-xl lg:text-4xl font-bold text-gray-900"
              >
                Education
              </Title>
